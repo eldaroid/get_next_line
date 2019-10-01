@@ -6,7 +6,7 @@
 /*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 03:53:16 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/09/22 23:24:53 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/01 19:57:07 by fgracefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
+	if (!(str) || !*str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);

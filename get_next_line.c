@@ -6,7 +6,7 @@
 /*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:47:04 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/01 17:02:30 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/01 20:55:12 by fgracefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	get_next_line(const int fd, char **line)// 1 0 -1
 	char		buf[BUFF_SIZE + 1];
 	int			how_much;
 	char		*pointer_find;
-	int			flag;
+	char		*pointer_del;
 
-	flag = 1;
 	if (last)
 	{
+		printf("%d\n", 5);
 		if ((pointer_find = ft_strchr(last, '\n')))
 		{
 			*pointer_find++ = '\0';
@@ -32,24 +32,30 @@ int	get_next_line(const int fd, char **line)// 1 0 -1
 		else
 		{
 			*line = ft_strdup(last);
-			// printf("%d\n", 1);
-			free(last);
+			ft_strclr(last);
+			// ft_strdel(&last);
 		}
 	}
 	else
 		*line = ft_strnew(1);
-	while((flag != 0) &&(how_much = read(fd, buf, BUFF_SIZE))) ///director,\0 film 
-	{
+	pointer_find = NULL;
+	while((!pointer_find) &&(how_much = read(fd, buf, BUFF_SIZE))) // pointer_find в строчку 41 становится не нулевым, в случае если он стал
+ 	{
+		// ft_strdel(&last);
+		// printf("%d", how_much);
 		buf[how_much] = '\0';
 		if ((pointer_find = ft_strchr(buf, '\n')))
 		{
 			*pointer_find++ = '\0';
-			flag = 0;
 			last = ft_strdup(pointer_find);
+			// printf("%d\n", 5);
 		}
+		// printf("%d\n", 54);
+		// pointer_del = *line;
 		*line = ft_strjoin(*line, buf);
+		// free(pointer_del);
 	}
-	return (0);
+	return ((how_much || ft_strlen(last) || ft_strlen(*line)) ? 1 : 0);
 }
 
 int	main(int argc, char **argv)
@@ -58,26 +64,13 @@ int	main(int argc, char **argv)
 	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s\n", line);
-		get_next_line(fd, &line);
-	printf("%s", line);
+	while (get_next_line(fd, &line))
+	{
+		printf("\n%d\n", 8);
+		printf("%s\n", line);
+		// ft_putendl(line);
+		free(line);
+	}
 	return (0);
 }
 
