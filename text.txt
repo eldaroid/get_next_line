@@ -1,3 +1,4 @@
+gcc get_next_line.c -L libft/ -lft
 Neill Blomkamp (born 17 September 1979) is a South African-Canadian film director,
 film producer, screenwriter, and animator. Blomkamp employs a documentary-style,
 hand-held, cinéma vérité technique, blending naturalistic and photo-realistic computergenerated effects. He is best known as the co-writer and director of the critically acclaimed
