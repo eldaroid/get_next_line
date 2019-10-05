@@ -6,13 +6,13 @@
 /*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:47:04 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/05 17:37:45 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/05 18:17:41 by fgracefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	to_check(char *last, char **line)
+char	*to_check(char *last, char **line)
 {
 	char		*pointer_find;
 
@@ -24,13 +24,11 @@ char	to_check(char *last, char **line)
 			*pointer_find++ = '\0';
 			*line = ft_strdup(last);
 			ft_strcpy(last, pointer_find);
-			free(last);
 		}
 		else
 		{
 			*line = ft_strdup(last);
 			ft_strclr(last);
-			free(last);
 		}
 	}
 	else
@@ -54,14 +52,13 @@ int		get_next_line(const int fd, char **line)
 	static char	*last;
 	char		buf[BUFF_SIZE + 1];
 	int			how_much;
-	char		*pointer_del;
 	char		*pointer_f;
 
 	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
 	pointer_f = to_check(last, line);
-	while((!pointer_f) &&(how_much = read(fd, buf, BUFF_SIZE)))
- 	{
+	while ((!pointer_f) && (how_much = read(fd, buf, BUFF_SIZE)))
+	{
 		buf[how_much] = '\0';
 		if ((pointer_f = ft_strchr(buf, '\n')))
 		{
@@ -71,5 +68,7 @@ int		get_next_line(const int fd, char **line)
 		}
 		*line = ft_strjoinf(*line, buf);
 	}
-	return ((how_much || ft_strlen(last) || ft_strlen(*line)) ? 1 : 0);
+	if (how_much == 0 && !(ft_strlen(*line)))
+		return (0);
+	return (1);
 }
