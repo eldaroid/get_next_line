@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldaroid <eldaroid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:47:04 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/01 20:55:12 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/05 13:53:55 by eldaroid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	get_next_line(const int fd, char **line)// 1 0 -1
 	char		*pointer_find;
 	char		*pointer_del;
 
+	pointer_find = NULL;
 	if (last)
 	{
-		printf("%d\n", 5);
+		//  printf("%s\n", last);
 		if ((pointer_find = ft_strchr(last, '\n')))
 		{
 			*pointer_find++ = '\0';
@@ -33,12 +34,12 @@ int	get_next_line(const int fd, char **line)// 1 0 -1
 		{
 			*line = ft_strdup(last);
 			ft_strclr(last);
-			// ft_strdel(&last);
+			//ft_strdel(&last);
 		}
 	}
 	else
 		*line = ft_strnew(1);
-	pointer_find = NULL;
+		
 	while((!pointer_find) &&(how_much = read(fd, buf, BUFF_SIZE))) // pointer_find в строчку 41 становится не нулевым, в случае если он стал
  	{
 		// ft_strdel(&last);
@@ -46,8 +47,13 @@ int	get_next_line(const int fd, char **line)// 1 0 -1
 		buf[how_much] = '\0';
 		if ((pointer_find = ft_strchr(buf, '\n')))
 		{
-			*pointer_find++ = '\0';
+			// pointer_find--;
+			// printf("%c\n", *pointer_find);
+			// pointer_find++;
+			*pointer_find = '\0';
+			pointer_find++;
 			last = ft_strdup(pointer_find);
+			//  printf("AAAA%s\n\n", last);
 			// printf("%d\n", 5);
 		}
 		// printf("%d\n", 54);
@@ -62,15 +68,36 @@ int	main(int argc, char **argv)
 {
 	char	*line;
 	int		fd;
-
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line))
+	int i = 1;
+	
+	if (argc == 2)
 	{
-		printf("\n%d\n", 8);
-		printf("%s\n", line);
-		// ft_putendl(line);
-		free(line);
+		fd = open(argv[1], O_RDONLY);
+		while (get_next_line(fd, &line))
+		{
+			printf("заходим в цикл %d\n", i);
+			printf("%s\n", line);
+			// ft_putendl(line);
+			i++;
+			free(line);
+		}
 	}
+	// get_next_line(fd, &line);
+	// printf("заходим в цикл %d\n", i);
+	// printf("%s\n", line);
+	// i++; // 2
+	// get_next_line(fd, &line);
+	// printf("заходим в цикл %d\n", i);
+	// printf("%s\n", line);
+	// i++; // 3
+	// get_next_line(fd, &line);
+	// printf("заходим в цикл %d\n", i);
+	// printf("%s\n", line);
+	// i++; // 4
+	// get_next_line(fd, &line);
+	// printf("заходим в цикл %d\n", i);
+	// printf("%s\n", line);
+	// i++;
 	return (0);
 }
 

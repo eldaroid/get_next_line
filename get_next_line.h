@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldaroid <eldaroid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:52:26 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/01 20:41:20 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/05 13:54:17 by eldaroid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 1000
+# define BUFF_SIZE 10
 
 # include <stdio.h>
 # include <fcntl.h> // open
