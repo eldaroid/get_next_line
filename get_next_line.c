@@ -6,7 +6,7 @@
 /*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:47:04 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/05 18:26:36 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/07 18:15:53 by fgracefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,28 @@ int		get_next_line(const int fd, char **line)
 	if (how_much == 0 && !(ft_strlen(*line)))
 		return (0);
 	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	char	*line;
+	int		fd;
+	int i = 1;
+
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		while (get_next_line(fd, &line))
+		{
+			printf("заходим в цикл %d\n", i);
+			printf("%s\n", line);
+			i++;
+			free(line);
+		}
+	}
+	// get_next_line(fd, &line);
+	// 	// {
+	// 		printf("заходим в цикл %d\n", i);
+	// 		printf("%s\n", line);
+	return(0);
 }
