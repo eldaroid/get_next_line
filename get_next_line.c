@@ -6,35 +6,34 @@
 /*   By: fgracefo <fgracefo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:47:04 by fgracefo          #+#    #+#             */
-/*   Updated: 2019/10/07 19:26:44 by fgracefo         ###   ########.fr       */
+/*   Updated: 2019/10/07 23:21:15 by fgracefo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*to_check(char *last, char **line)
+char	*to_check(char **last, char **line)
 {
 	char		*pointer_find;
 
 	pointer_find = NULL;
-	if (last)
+	if (*last)
 	{
-		if ((pointer_find = ft_strchr(last, '\n')))
+		if ((pointer_find = ft_strchr(*last, '\n')))
 		{
-			*pointer_find++ = '\0';
-			*line = ft_strdup(last);
-			ft_strcpy(last, pointer_find);
+			*pointer_find = '\0';
+			pointer_find++;
+			*line = ft_strdup(*last);
+			ft_strcpy(*last, pointer_find);
 		}
 		else
 		{
-			*line = ft_strdup(last);
-			ft_strclr(last);
+			*line = ft_strdup(*last);
+			ft_strclr(*last);
 		}
 	}
 	else
-	{
-		*line = ft_strnew(1);
-	}
+		*line = ft_strnew(0);
 	return (pointer_find);
 }
 
@@ -56,8 +55,11 @@ int		get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
-	pointer_f = to_check(last, line);
-	while ((!pointer_f || !(*pointer_f)) && (how_much = read(fd, buf, BUFF_SIZE)))
+	pointer_f = to_check(&last, line);
+	if (pointer_f)
+		if (!(*pointer_f))
+			return (1);
+	while ((!pointer_f) && (how_much = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[how_much] = '\0';
 		if ((pointer_f = ft_strchr(buf, '\n')))
@@ -68,19 +70,17 @@ int		get_next_line(const int fd, char **line)
 		}
 		*line = ft_strjoinf(*line, buf);
 	}
-	if (how_much == 0 && !(ft_strlen(*line)))
-		return (0);
-	return (1);
+	return (how_much || ft_strlen(last) || ft_strlen(*line) ? 1 : 0);
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
 	char	*line;
 	int		fd;
 	// int i = 1;
 	int rd;
 
-	fd = open("text.txt", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	line = NULL;
 	while ((rd = get_next_line(fd, &line)) > 0)
 	{
