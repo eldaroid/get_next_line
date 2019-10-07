@@ -48,14 +48,14 @@ char	*ft_strjoinf(char *s1, char *s2)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*last;
+	static char	*last[FD_MAX];
 	char		buf[BUFF_SIZE + 1];
 	int			how_much;
 	char		*pointer_f;
 
 	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
-	pointer_f = to_check(&last, line);
+	pointer_f = to_check(&last[fd], line);
 	if (pointer_f)
 		if (!(*pointer_f))
 			return (1);
@@ -66,11 +66,11 @@ int		get_next_line(const int fd, char **line)
 		{
 			*pointer_f = '\0';
 			pointer_f++;
-			last = ft_strdup(pointer_f);
+			last[fd] = ft_strdup(pointer_f);
 		}
 		*line = ft_strjoinf(*line, buf);
 	}
-	return (how_much || ft_strlen(last) || ft_strlen(*line) ? 1 : 0);
+	return (how_much || ft_strlen(last[fd]) || ft_strlen(*line) ? 1 : 0);
 }
 
 int	main(int argc, char **argv)
