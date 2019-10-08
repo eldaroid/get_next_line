@@ -1,0 +1,10 @@
+cp -rf (what) (to: ../gnl)
+Rm -rf ~/Library/**42_cache**
+
+
+—————————————————————
+Nickname:
+akelli - Вика - вышка
+ngale - Саша - хохотушка - макарошка
+rstarfir - Илья - Малайзия
+hthunder - Юра Филит
