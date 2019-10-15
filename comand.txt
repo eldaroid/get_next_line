@@ -1,6 +1,8 @@
 cp -rf (what) (to: ../gnl)
-Rm -rf ~/Library/**42_cache**
-
+rm -rf ~/Library/**42_cache**
+mv /gnl/.vscode ../fillit
+gcc main.c -L. -lft (должен быть lift.a)
+gcc -g main.c Etetr_read_chech.c -L. -lft
 
 —————————————————————
 Nickname:
@@ -8,3 +10,6 @@ akelli - Вика - вышка
 ngale - Саша - хохотушка - макарошка
 rstarfir - Илья - Малайзия
 hthunder - Юра Филит
+fdaryn-h - предыдущий лидер
+Ssheba - нынешний лидер
+wzei- тип который сдал принтф на 116 его проверял Илья рассказывал что они затащили его, их еще проверяла Джена- девушка из Америки
