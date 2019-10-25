@@ -5,6 +5,23 @@ gcc main.c -L. -lft (должен быть lift.a)
 gcc -g main.c Etetr_read_chech.c -L. -lft
 
 —————————————————————
+Предварительно необходимо скачать расширение "Power Mode"
+Чтобы открыть setting.json в vscode нам необходимо нажать Command + P, выйдет окно и в нем необходимо набрать >settings и выбираем Open Settings JSON!
+
+{
+    "files.autoSave": "afterDelay",
+    "editor.insertSpaces": false,
+    "files.insertFinalNewline": true,
+    "explorer.confirmDelete": false,
+    "powermode.enabled": true,
+    "powermode.presets": "fireworks",
+    "window.zoomLevel": 0,
+    "powermode.enableShake": false,
+    "C_Cpp.updateChannel": "Insiders"
+    
+}
+
+—————————————————————
 Nickname:
 akelli - Вика - вышка
 ngale - Саша - хохотушка - макарошка
