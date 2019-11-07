@@ -22,6 +22,30 @@ gcc -g main.c Etetr_read_chech.c -L. -lft
 }
 
 —————————————————————
+ Compilation ERRORs
+—————————————————————
+ РАБОТА СО СПИСКАМИ:
+
+инициализация структуры:
+typedef struct      s_tetri
+{
+    char            anything;
+    int             anything;
+    struct s_tetri  *next;   // ВСЕГДА
+}                   t_tetri;
+
+всегда должны создать указатель на голову и на текущий :
+t_tetri *head;
+t_tetri	*current;
+
+
+проверку делать всегда 	if (!current->next)
+				return (NULL);
+ 
+в самом конце работы нужно писать это 
+
+current->next = NULL;
+—————————————————————
 Nickname:
 akelli - Вика - вышка
 ngale - Саша - хохотушка - макарошка
