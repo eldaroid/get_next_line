@@ -28,6 +28,9 @@ gcc -g main.c Etetr_read_chech.c -L. -lft
 
 —————————————————————
  Compilation ERRORs
+
+control reaches end of non-void function [-Wreturn-type] 
+- это означает, что если в переменной ничего не будет и по if`ам не пройдет, то нечего будет возвращать
 —————————————————————
  РАБОТА СО СПИСКАМИ:
 
