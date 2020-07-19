@@ -2,7 +2,8 @@ cp -rf (рекурсивно, то есть то что даже внутри п
 rm -rf ~/Library/**42_cache**
 mv /gnl/.vscode ../fillit
 gcc main.c -L. -lft (должен быть lift.a)
-gcc -g main.c Etetr_read_chech.c -L. -lft
+gcc -g main.c Etetr_read_chech.c -L. -lft - g для дебага
+gcc -g $(SRCS) -L. -lft -I header - если нужно явно указать где находится header file (в нашем случае в ПАПКЕ header)
 
 
 
