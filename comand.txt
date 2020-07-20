@@ -6,6 +6,11 @@ gcc -g main.c Etetr_read_chech.c -L. -lft - g для дебага
 gcc -g $(SRCS) -L. -lft -I header - если нужно явно указать где находится header file (в нашем случае в ПАПКЕ header)
 gcc -g *.c -L libft -lft -I.  - если хедер находится здесь же, а libft.a в папке lift
 
+Compile printf
+cd libft && make && make clean && cd .. && gcc -g -Wall -Wextra -Werror sources/*.c -L libft/ -lft -I header
+
+
+
 
 
 // i-- - означает что он сначала сравнит их а потом сделает -1
